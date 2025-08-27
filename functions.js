@@ -2,6 +2,11 @@ const prompt = require('prompt-sync')({
     'fake_val': 'OPTIONAL CONFIG VALUES HERE'
 });
 
+function rndNum(){
+    let num = Math.floor(Math.random() * 3) + 1
+    return num
+}
+
 function checkLetter(word, hiddenWord, letter){
     hiddenWord = hiddenWord.split('')
     for(let i = 0; i < word.length; i++){
@@ -93,4 +98,4 @@ function calculateScore(attempts, scoreScale){
     return false
 }
 
-module.exports = {checkLetter, chooseDifficulty, isValidNumber, isValidLetter, wasLetterEntered, checkFullWord, calculateScore}
+module.exports = {checkLetter, chooseDifficulty, isValidNumber, isValidLetter, wasLetterEntered, checkFullWord, calculateScore, rndNum}

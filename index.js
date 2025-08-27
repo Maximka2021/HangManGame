@@ -1,8 +1,7 @@
-const {checkLetter, chooseDifficulty, isValidNumber, isValidLetter, wasLetterEntered, calculateScore, checkFullWord} = require('./functions')
+const {checkLetter, chooseDifficulty, isValidNumber, isValidLetter, wasLetterEntered, calculateScore, checkFullWord, rndNum} = require('./functions')
 
 let prompt = require('prompt-sync')()
 function mainMenu(){
-    
     console.log("WELCOME TO MY HANG MAN GAME!!!")
     console.log("\n 1. Start New Game")
     console.log("\n 2. Rules")
@@ -41,15 +40,15 @@ function startGame(){
     console.log("You choose " + difficulty)
 
     if(difficulty == "Easy"){
-        word = wordList[0][0]
+        word = wordList[0][rndNum()]
         scoreScale = 1.3
     }
     else if(difficulty == "Medium"){
-        word = wordList[1][1]
+        word = wordList[1][rndNum()]
         scoreScale = 1.5
     }
     else if(difficulty == "Hard"){
-        word = wordList[2][2]
+        word = wordList[2][rndNum()]
         scoreScale = 1.9
     }
 
