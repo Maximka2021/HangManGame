@@ -1,8 +1,25 @@
 const {checkLetter, chooseDifficulty, isValidNumber, isValidLetter, wasLetterEntered, calculateScore, checkFullWord, rndNum} = require('./functions')
 
 let prompt = require('prompt-sync')()
+
+console.log("+------------+----------+-------+");
+console.log("| Date       | Name     | Score |");
+console.log("+------------+----------+-------+");
+console.log("| 2025-08-28 | Alice    |   150 |");
+console.log("| 2025-08-27 | Bob      |   145 |");
+console.log("| 2025-08-26 | Charlie  |   137 |");
+
+let database = [{"name":"Maxim", "score":100, "date":"2025-08-24"},{"name":"Anton", "score":130, "date":"2025-08-23"},{"name":"Sveta", "score":110, "date":"2025-08-29"}]
+database = database.sort((a, b) => b.score - a.score)
+for(i = 0; i < database.length; i++){
+    console.log(`| ${database[i].date} | ${database[i].name}    |   ${database[i].score} |`);   
+}
+console.log("+------------+----------+-------+");
+
+//Add score-saving system with database
+
+console.log("WELCOME TO MY HANG MAN GAME!!!")
 function mainMenu(){
-    console.log("WELCOME TO MY HANG MAN GAME!!!")
     console.log("\n 1. Start New Game")
     console.log("\n 2. Rules")
     console.log("\n 3. Exit")
@@ -40,15 +57,15 @@ function startGame(){
     console.log("You choose " + difficulty)
 
     if(difficulty == "Easy"){
-        word = wordList[0][rndNum()]
+        word = wordList[0][1]
         scoreScale = 1.3
     }
     else if(difficulty == "Medium"){
-        word = wordList[1][rndNum()]
+        word = wordList[1][2]
         scoreScale = 1.5
     }
     else if(difficulty == "Hard"){
-        word = wordList[2][rndNum()]
+        word = wordList[2][0]
         scoreScale = 1.9
     }
 

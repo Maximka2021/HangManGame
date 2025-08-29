@@ -35,14 +35,11 @@ function chooseDifficulty(){
 function isValidNumber(num){
 
     if (num.trim().split('').length > 1){
-        console.log("You must enter 1 , 2 or 3. \nYou entered => " + num)
+        console.log("You must enter 1, 2 or 3. \nYou entered => " + num)
         return false
     }
     else if (parseInt(num) >= 1 && parseInt(num) <= 3){
         return true
-    }else{
-        console.log("You must enter 1, 2 or 3. \nYou entered => " + num)
-        return false
     }
     
 }
@@ -50,13 +47,12 @@ function isValidNumber(num){
 function isValidLetter(letter){
     let alphabet = [
   'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z']
-
     if (letter.trim().split('').length > 1){
         console.log("You must enter one letter only \nYou entered => " + letter)
         return false
     }
 
-    if(!alphabet.includes(letter)){
+    if(!alphabet.includes(letter.trim().toLowerCase())){
         console.log('You must enter a single letter \n You have entered ' + letter)
         return false
     }
