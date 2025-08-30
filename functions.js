@@ -60,6 +60,14 @@ function isValidLetter(letter){
     return true
 }
 
+function isValidUsername(username){
+    if(username.length <= 2){
+        console.log(`${username} is too shor at least 3 characters`)
+        return false
+    }
+    return true
+}
+
 function wasLetterEntered(usedLetters, letter){
     if(usedLetters.includes(letter)){
         console.log("You have tried letter " + letter)
@@ -70,12 +78,12 @@ function wasLetterEntered(usedLetters, letter){
     }
 }
 
-function checkFullWord(word, scoreScale, attempts){
+function checkFullWord(word, scoreScale, attempts, score){
     console.log("!!!!!      BE CAREFULL YOU ONLY HAVE 1 ATTEMPT     !!!!!")
     let response = prompt("Please enter a full word => ")
     if (response.trim().toLowerCase().split(' ').join('') === word.join('')){
         word = word.join('')
-        calculateScore(attempts, scoreScale, word)
+        calculateScore(attempts, scoreScale, word, score)
     }else{
         console.log("Wrong => " + word)
         calculateScore(attempts = 0, scoreScale = 0)
@@ -83,15 +91,26 @@ function checkFullWord(word, scoreScale, attempts){
    return false
 }
 
-function calculateScore(attempts, scoreScale){
+function calculateScore(attempts, scoreScale, score){
     if(scoreScale === 0){
         console.log("You Lost")
         console.log("\n Score: "+ 0)
     }else{ 
+        score = attempts * scoreScale * 100
         console.log("You WON!!!")
-        console.log("You total score is " + Math.ceil(attempts * scoreScale * 100))
+        console.log("You total score is " + Math.ceil(score))
+        scoreHolder(score)
     }
     return false
 }
 
-module.exports = {checkLetter, chooseDifficulty, isValidNumber, isValidLetter, wasLetterEntered, checkFullWord, calculateScore, rndNum}
+let temp = 0
+
+function scoreHolder(score){
+   if(score !== 0){
+    temp = score
+   }
+   return temp
+}
+
+module.exports = {checkLetter, chooseDifficulty, isValidNumber, isValidLetter, wasLetterEntered, checkFullWord, calculateScore, rndNum, isValidUsername, scoreHolder}

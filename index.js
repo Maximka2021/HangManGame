@@ -1,4 +1,4 @@
-const {checkLetter, chooseDifficulty, isValidNumber, isValidLetter, wasLetterEntered, calculateScore, checkFullWord, rndNum} = require('./functions')
+const {checkLetter, chooseDifficulty, isValidNumber, isValidLetter, wasLetterEntered, calculateScore, checkFullWord, isValidUsername, scoreHolder} = require('./functions')
 
 let prompt = require('prompt-sync')()
 
@@ -46,6 +46,7 @@ function mainMenu(){
 
 
 function startGame(){
+    let score = 0
     let isPlaying = true
     let scoreScale = 0
     let usedLetters = []
@@ -83,8 +84,8 @@ mainLoop: while(attempts > 0 && isPlaying){
 
         while(!isValidLetter(response) || !wasLetterEntered(usedLetters, response)){
             if(response.trim() === "0"){
-                checkFullWord(word, scoreScale, attempts)
-                mainMenu()
+                checkFullWord(word, scoreScale, attempts, score)
+                scoreSaving(score)
                 break mainLoop
             }
             response = prompt("Please enter one letter or press 0 to enter a full word => ")  
@@ -97,9 +98,9 @@ mainLoop: while(attempts > 0 && isPlaying){
             attempts--
             console.log(`You have attempts ${attempts} left`)
             if(!hiddenWord.split("").includes("*")){
-                isPlaying = calculateScore(attempts, scoreScale)
+                isPlaying = calculateScore(attempts, scoreScale, score)
                 attempts = 0
-                mainMenu()
+                scoreSaving(score)
             }
 
         }else if(response != 0 && !word.includes(response)){
@@ -119,6 +120,33 @@ function showRules(){
 function gameStop(){
     console.log("Stop Game")
     return
+}
+
+function scoreSaving(score){
+    score = scoreHolder(0)
+    console.log(`=>>>> ${score}`)
+    console.log(`\n Would you like to save your score`)
+    console.log(`\n 1. Yes \n 2. No \n 3. Main Menu`)
+    let response = prompt("Please choose one of the options above by entering corresponding number: ")
+
+    while(!isValidNumber(response)){
+        response = prompt("Please choose one of the options above by entering corresponding number: ")
+    }
+
+        if(response === "1"){
+            response = prompt("\nEnter you name/nickname")
+            while(!isValidUsername(response)){
+                response = prompt("\nEnter you name/nickname")
+                // Finish isValidUsername
+            }
+
+            console.log(`Your score is saved ${response}`)
+
+        }
+        else if(response === "2") console.log("Not saving")
+        else console.log("Main menu")
+
+
 }
 
 mainMenu()
