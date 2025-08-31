@@ -134,9 +134,9 @@ function scoreSaving(score){
     }
 
         if(response === "1"){
-            response = prompt("\nEnter you name/nickname")
+            response = prompt("Enter you name ")
             while(!isValidUsername(response)){
-                response = prompt("\nEnter you name/nickname")
+                response = prompt("Enter you name ")
                 // Finish isValidUsername
             }
 

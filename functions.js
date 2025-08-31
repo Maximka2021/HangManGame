@@ -61,8 +61,23 @@ function isValidLetter(letter){
 }
 
 function isValidUsername(username){
-    if(username.length <= 2){
+const symbolsAndNumbers = ["0","1","2","3","4","5","6","7","8","9",
+"!","@","#","$","%","^","&","*","(",")",
+  "-","_","=","+",
+  "[","]","{","}",";",":","'","\"",
+  ",",".","<",">","/","?","\\","|","`","~"
+]
+
+    if(username.trim().length <= 2){
         console.log(`${username} is too shor at least 3 characters`)
+        return false
+    }
+    else if(username.trim().length >= 10){
+        console.log(`${username} is too long 9 characters max`)
+        return false
+    }
+    else if(symbolsAndNumbers.includes(username.trim().split('')[0])){
+        console.log(`${username} You can't use a symbal or a number as a first character`)
         return false
     }
     return true
